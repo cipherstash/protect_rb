@@ -23,8 +23,9 @@ module CipherStash
                   out << token[i, token_length]
                 end
 
-                a, b, c, *rest = token.split("")
-                init_ngram = [[a, b, c].join]
+                split_token = token.split("")
+                init_ngram = [split_token[0, token_length].join]
+                rest = split_token[token_length, split_token.length]
 
                 edge_ngram =
                   rest.reduce(init_ngram) do |acc, char|
